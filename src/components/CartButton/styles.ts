@@ -1,18 +1,31 @@
-import styled from "styled-components";
+import styled from 'styled-components'
+import { defaultTheme } from '../../styles/themes/default'
 
-export const CartContainer = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
+export type VariantColors = 'purple' | 'gold'
 
-  height: 2.5rem;
-  width: 2.5rem;
+interface CartContainerProps {
+	variant: VariantColors
+}
 
-  background: ${props => props.theme["yellow-light"]};
-  border: none;
+export const CartContainer = styled.button<CartContainerProps>`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 6px;
+	border: none;
 
-  svg {
-    color: ${props => props.theme["yellow-dark"]};
-  }
+	height: 2.5rem;
+	width: 2.5rem;
+
+	background: ${(props) =>
+		props.variant === 'purple' && `${defaultTheme['purple-dark']}`};
+	background: ${(props) =>
+		props.variant === 'gold' && `${defaultTheme['yellow-light']}`};
+
+	svg {
+		color: ${(props) =>
+			props.variant === 'purple' && `${defaultTheme.background}`};
+		color: ${(props) =>
+			props.variant === 'gold' && `${defaultTheme['yellow-dark']}`};
+	}
 `

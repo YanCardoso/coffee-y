@@ -9,7 +9,7 @@ export function Header(){
       <img src={CoffeeLogo} alt="Coffee" />
       <nav>
         <a href=""><MapPin size={24} weight='fill'/>Belém, PA</a>
-        <CartButton />
+        <CartButton variant='gold'/>
       </nav>
     </HeaderContainer>
   )

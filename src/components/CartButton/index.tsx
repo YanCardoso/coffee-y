@@ -1,10 +1,17 @@
 import { ShoppingCartSimple } from 'phosphor-react'
-import { CartContainer } from './styles'
+import { CartContainer, VariantColors } from './styles'
 
-export function CartButton() {
+interface CartContainer {
+	variant: VariantColors
+}
+
+export function CartButton({ variant }: CartContainer) {
 	return (
-		<CartContainer>
-			<ShoppingCartSimple weight='fill' size={22}/>
+		<CartContainer variant={variant}>
+			<ShoppingCartSimple
+				weight='fill'
+				size={22}
+			/>
 		</CartContainer>
 	)
 }
