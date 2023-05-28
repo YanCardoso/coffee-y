@@ -14,6 +14,8 @@ export const CartContainer = styled.button<CartContainerProps>`
 	border-radius: 6px;
 	border: none;
 
+	cursor: pointer;
+
 	height: 2.5rem;
 	width: 2.5rem;
 

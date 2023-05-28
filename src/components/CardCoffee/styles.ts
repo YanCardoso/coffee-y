@@ -6,7 +6,7 @@ export const CardContainer = styled.div`
 	flex-direction: column;
 	height: 19.375rem;
 	width: 16rem;
-	background: ${props => props.theme['base-card']};
+	background: ${(props) => props.theme['base-card']};
 	border-radius: 6px 36px;
 	padding: 0 1.5rem 1.25rem;
 
@@ -69,4 +69,9 @@ export const ActionButtons = styled.div`
 	justify-content: center;
 	align-items: center;
 	gap: 0.5rem;
+`
+
+export const LabelBoxContainer = styled.div`
+	display: flex;
+	gap: 0.25rem;
 `

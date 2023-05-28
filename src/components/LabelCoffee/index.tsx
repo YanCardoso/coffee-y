@@ -1,9 +1,9 @@
-import { LabelContainer } from "./styles";
+import { LabelContainer } from './styles'
 
-export function LabelCoffee() {
-  return (
-    <LabelContainer>
-      TRADICIONAL
-    </LabelContainer>
-  )
+interface LabelCoffeeProps {
+	text: string
+}
+
+export function LabelCoffee({ text }: LabelCoffeeProps) {
+	return <LabelContainer>{text}</LabelContainer>
 }

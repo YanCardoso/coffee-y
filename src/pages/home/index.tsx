@@ -1,5 +1,6 @@
 import coffee_img from '../../assets/coffee_img.png'
 import { CardCoffee } from '../../components/CardCoffee'
+import { coffeesItens } from '../../utils/coffeeItens'
 import {
 	CardItensContainer,
 	CoffeeIcon,
@@ -68,12 +69,21 @@ export function Home() {
 			</IntroContainer>
 			<ListSection>
 				<h2>Nossos Cafés</h2>
-			<CardItensContainer>
-				<CardCoffee />
-				<CardCoffee />
-				<CardCoffee />
-				<CardCoffee />
-			</CardItensContainer>
+				<CardItensContainer>
+					{coffeesItens.map((item) => {
+						return (
+							<CardCoffee
+								key={item.id}
+								id={item.id}
+								name={item.name}
+								description={item.description}
+								label={item.label}
+								price={item.price}
+								coffeeImg={item.coffeeImg}
+							/>
+						)
+					})}
+				</CardItensContainer>
 			</ListSection>
 		</>
 	)

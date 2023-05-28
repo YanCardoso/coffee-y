@@ -101,4 +101,6 @@ export const CardItensContainer = styled.div`
 	width: 100%;
 	height: inherit;
 	flex-wrap: wrap;
+	row-gap: 2.5rem;
+	column-gap: 2rem;
 `
