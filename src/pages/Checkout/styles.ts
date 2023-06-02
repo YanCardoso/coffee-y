@@ -27,6 +27,17 @@ export const BoxForm = styled(BoxBase)`
 	flex: 1;
 	max-width: 40.625rem;
 `
+export const BoxPayment = styled(BoxBase)`
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	max-width: 40.625rem;
+	background: ${(props) => props.theme['base-card']};
+	padding: 2.5rem;
+	margin-top: 0.75rem;
+	border-radius: 6px;
+`
+
 export const BoxCart = styled(BoxBase)`
 	display: flex;
 	flex-direction: column;
@@ -41,6 +52,7 @@ export const CompleteOrderForm = styled.div`
 	flex: 1;
 	max-width: inherit;
 	padding: 2.5rem;
+	border-radius: 6px;
 `
 export const CheckoutCart = styled.div`
 	display: flex;
@@ -49,6 +61,7 @@ export const CheckoutCart = styled.div`
 	flex: 0.5;
 	max-width: inherit;
 	padding: 2.5rem;
+	border-radius: 6px 40px;
 `
 export const FormHeader = styled.div`
 	display: flex;
@@ -63,6 +76,7 @@ export const HeaderTextBox = styled.div`
 
 	& > h3 {
 		font-size: 1rem;
+		font-weight: normal;
 		color: ${(props) => props.theme['base-subtitle']};
 	}
 
@@ -101,11 +115,28 @@ export const PostalCodeInput = styled(BaseInput)`
 	max-width: 12.5rem;
 `
 export const StreetInput = styled(BaseInput)`
-	flex: 1;
+	flex-basis: 100%;
 `
 export const NumberInput = styled(BaseInput)`
 	max-width: 12.5rem;
 `
+export const OptionalBox = styled.div`
+	display: flex;
+	position: relative;
+	align-items: center;
+	flex: 1;
+
+	& > span {
+		position: absolute;
+		font-family: 'Roboto', sans-serif;
+		color: ${(props) => props.theme['base-label']};
+		right: 0.75rem;
+		font-size: 0.75rem;
+		line-height: 130%;
+		font-style: italic;
+	}
+`
+
 export const ComplementInput = styled(BaseInput)`
 	flex: 1;
 `
