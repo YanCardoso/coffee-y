@@ -218,3 +218,22 @@ export const ButtonGroupContainer = styled.div`
 		}
 	}
 `
+export const SubmitOrderButton = styled.button`
+	display: flex;
+	width: 100%;
+	padding: 0.75rem 0.5rem;
+	border: none;
+	border-radius: 6px;
+	align-items: center;
+	justify-content: center;
+	margin-top: 1.5rem;
+
+	background: ${(props) => props.theme.yellow};
+	color: ${(props) => props.theme.white};
+
+	font-family: 'Roboto', sans-serif;
+	font-size: 0.875rem;
+	font-weight: 700;
+	line-height: 130%;
+
+`
