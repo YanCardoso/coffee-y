@@ -5,6 +5,7 @@ import {
 	MapPinLine,
 	Money,
 } from 'phosphor-react'
+import { CartProductItem } from '../../components/CartProductItem'
 import {
 	BoxCart,
 	BoxForm,
@@ -15,6 +16,7 @@ import {
 	CityInput,
 	ComplementInput,
 	CompleteOrderForm,
+	DeliveryWrapper,
 	FormBody,
 	HeaderDeliveryAddressBox,
 	HeaderPaymentBox,
@@ -25,6 +27,9 @@ import {
 	PostalCodeInput,
 	StateInput,
 	StreetInput,
+	TotalItemsWrapper,
+	TotalPriceContainer,
+	TotalWrapper,
 } from './styles'
 
 export function Checkout() {
@@ -83,7 +88,25 @@ export function Checkout() {
 				</BoxForm>
 				<BoxCart>
 					<h2>Cafés selecionados</h2>
-					<CheckoutCart>test</CheckoutCart>
+					<CheckoutCart>
+						<CartProductItem />
+						<CartProductItem />
+						<CartProductItem />
+						<TotalPriceContainer>
+							<TotalItemsWrapper>
+								<span>Total de itens</span>
+								<span>R$ 46,54</span>
+							</TotalItemsWrapper>
+							<DeliveryWrapper>
+								<span>Entrega</span>
+								<span>R$ 49,45</span>
+							</DeliveryWrapper>
+							<TotalWrapper>
+								<span>Total</span>
+								<span>R$ 858,99</span>
+							</TotalWrapper>
+						</TotalPriceContainer>
+					</CheckoutCart>
 				</BoxCart>
 			</CheckoutContainer>
 		</form>

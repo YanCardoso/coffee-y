@@ -63,6 +63,37 @@ export const CheckoutCart = styled.div`
 	padding: 2.5rem;
 	border-radius: 6px 40px;
 `
+
+export const TotalPriceContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 0.75rem;
+`
+
+const PriceBase = styled.div`
+	display: flex;
+	justify-content: space-between;
+	font-family: 'Roboto', sans-serif;
+	line-height: 130%;
+`
+
+export const TotalItemsWrapper = styled(PriceBase)`
+	font-size: 0.875rem;
+	color: ${(props) => props.theme['base-text']};
+`
+
+export const DeliveryWrapper = styled(PriceBase)`
+	font-size: 0.875rem;
+	color: ${(props) => props.theme['base-text']};
+`
+
+export const TotalWrapper = styled(PriceBase)`
+	font-weight: 700;
+	font-size: 1.25rem;
+	color: ${(props) => props.theme['base-text']};
+`
+
 const FormHeader = styled.div`
 	display: flex;
 	position: relative;

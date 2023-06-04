@@ -1,7 +1,12 @@
 import { CartButton } from '../CartButton'
-import { CounterButton } from '../CountButton'
+import { CounterButton } from '../CounterButton'
 import { LabelCoffee } from '../LabelCoffee'
-import { ActionButtons, BuyContainer, CardContainer, LabelBoxContainer } from './styles'
+import {
+	ActionButtons,
+	BuyContainer,
+	CardContainer,
+	LabelBoxContainer,
+} from './styles'
 
 interface CardCoffeeProps {
 	id?: string
@@ -28,8 +33,8 @@ export function CardCoffee({
 			/>
 			<LabelBoxContainer>
 				<LabelCoffee text={label[0]} />
-				{label[1] && <LabelCoffee text={label[1]} /> }
-				{label[2] && <LabelCoffee text={label[2]} /> }
+				{label[1] && <LabelCoffee text={label[1]} />}
+				{label[2] && <LabelCoffee text={label[2]} />}
 			</LabelBoxContainer>
 			<h2>{name}</h2>
 			<span>{description}</span>
