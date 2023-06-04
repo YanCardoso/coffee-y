@@ -1,15 +1,23 @@
-import { CurrencyDollar, MapPinLine } from 'phosphor-react'
+import {
+	Bank,
+	CreditCard,
+	CurrencyDollar,
+	MapPinLine,
+	Money,
+} from 'phosphor-react'
 import {
 	BoxCart,
 	BoxForm,
 	BoxPayment,
+	ButtonGroupContainer,
 	CheckoutCart,
 	CheckoutContainer,
 	CityInput,
 	ComplementInput,
 	CompleteOrderForm,
 	FormBody,
-	FormHeader,
+	HeaderDeliveryAddressBox,
+	HeaderPaymentBox,
 	HeaderTextBox,
 	NeighborhoodInput,
 	NumberInput,
@@ -26,13 +34,13 @@ export function Checkout() {
 				<BoxForm>
 					<h2>Complete seu pedido</h2>
 					<CompleteOrderForm>
-						<FormHeader>
+						<HeaderDeliveryAddressBox>
 							<MapPinLine size={22} />
 							<HeaderTextBox>
 								<h3>Endereço de Entrega</h3>
 								<span>Informe o endereço onde deseja receber seu pedido</span>
 							</HeaderTextBox>
-						</FormHeader>
+						</HeaderDeliveryAddressBox>
 						<FormBody>
 							<PostalCodeInput placeholder='CEP' />
 							<StreetInput placeholder='Rua' />
@@ -47,18 +55,35 @@ export function Checkout() {
 						</FormBody>
 					</CompleteOrderForm>
 					<BoxPayment>
-					<FormHeader>
+						<HeaderPaymentBox>
 							<CurrencyDollar size={22} />
 							<HeaderTextBox>
 								<h3>Pagamento</h3>
-								<span>O pagamento é feito na entrega. Escolha a forma que deseja pagar</span>
+								<span>
+									O pagamento é feito na entrega. Escolha a forma que deseja
+									pagar
+								</span>
 							</HeaderTextBox>
-						</FormHeader>
+						</HeaderPaymentBox>
+						<ButtonGroupContainer>
+							<button>
+								<CreditCard size={16} />
+								CARTÃO DE CRÉDITO
+							</button>
+							<button>
+								<Bank size={16} />
+								CARTÃO DE DEBITO
+							</button>
+							<button>
+								<Money size={16} />
+								DINHEIRO
+							</button>
+						</ButtonGroupContainer>
 					</BoxPayment>
 				</BoxForm>
 				<BoxCart>
 					<h2>Cafés selecionados</h2>
-					<CheckoutCart>teste</CheckoutCart>
+					<CheckoutCart>test</CheckoutCart>
 				</BoxCart>
 			</CheckoutContainer>
 		</form>

@@ -63,12 +63,25 @@ export const CheckoutCart = styled.div`
 	padding: 2.5rem;
 	border-radius: 6px 40px;
 `
-export const FormHeader = styled.div`
+const FormHeader = styled.div`
 	display: flex;
 	position: relative;
 	margin-bottom: 2rem;
 	gap: 0.5rem;
 `
+
+export const HeaderDeliveryAddressBox = styled(FormHeader)`
+	& > svg {
+		color: ${(props) => props.theme['yellow-dark']};
+	}
+`
+
+export const HeaderPaymentBox = styled(FormHeader)`
+	& > svg {
+		color: ${(props) => props.theme.purple};
+	}
+`
+
 export const HeaderTextBox = styled.div`
 	font-family: 'Roboto', sans-serif;
 	line-height: 130%;
@@ -148,4 +161,29 @@ export const CityInput = styled(BaseInput)`
 `
 export const StateInput = styled(BaseInput)`
 	max-width: 3.75rem;
+`
+export const ButtonGroupContainer = styled.div`
+	display: flex;
+	align-items: center;
+	width: 100%;
+	gap: 0.75rem;
+
+	& > button {
+		display: flex;
+		flex: 1;
+		font-family: 'Roboto', sans-serif;
+		font-weight: 400;
+		line-height: 130%;
+		font-size: 0.75rem;
+		color: ${(props) => props.theme['base-text']};
+		padding: 1rem;
+		border: none;
+		border-radius: 6px;
+		cursor: pointer;
+		gap: 0.75rem;
+
+		& > svg {
+			color: ${(props) => props.theme.purple};
+		}
+	}
 `
