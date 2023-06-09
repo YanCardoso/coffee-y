@@ -107,7 +107,9 @@ export function Checkout() {
 								<span>R$ 858,99</span>
 							</TotalWrapper>
 						</TotalPriceContainer>
-						<SubmitOrderButton type='submit'>CONFIRMAR PEDIDO</SubmitOrderButton>
+						<SubmitOrderButton type='submit'>
+							CONFIRMAR PEDIDO
+						</SubmitOrderButton>
 					</CheckoutCart>
 				</BoxCart>
 			</CheckoutContainer>

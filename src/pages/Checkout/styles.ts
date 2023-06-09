@@ -227,7 +227,7 @@ export const SubmitOrderButton = styled.button`
 	align-items: center;
 	justify-content: center;
 	margin-top: 1.5rem;
-
+	height: 2.875rem;
 	background: ${(props) => props.theme.yellow};
 	color: ${(props) => props.theme.white};
 
