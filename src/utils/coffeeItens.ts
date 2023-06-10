@@ -48,7 +48,7 @@ export const coffeesItens: CoffeeItem[] = [
 		id: uuidv4(),
 		name: 'Expresso Gelado',
 		description: 'Bebida preparada com café expresso e cubos de gelo',
-		price: 11.2,
+		price: 11.9,
 		coffeeImg: pathImg.Type_Cafe_Gelado,
 		label: [label.Tradicional, label.Gelado],
 	},

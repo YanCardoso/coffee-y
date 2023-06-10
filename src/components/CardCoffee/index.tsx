@@ -9,7 +9,7 @@ import {
 } from './styles'
 
 interface CardCoffeeProps {
-	id?: string
+	id: string
 	name: string
 	description: string
 	price: number
@@ -44,7 +44,7 @@ export function CardCoffee({
 					<span>R$</span> {price}
 				</label>
 				<ActionButtons>
-					<CounterButton />
+					<CounterButton id={id}/>
 					<CartButton variant='purple' />
 				</ActionButtons>
 			</BuyContainer>

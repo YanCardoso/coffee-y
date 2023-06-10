@@ -1,6 +1,7 @@
+import { useContext } from 'react'
 import coffee_img from '../../assets/coffee_img.png'
 import { CardCoffee } from '../../components/CardCoffee'
-import { coffeesItens } from '../../utils/coffeeItens'
+import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
 import {
 	CardItensContainer,
 	CoffeeIcon,
@@ -16,6 +17,8 @@ import {
 	TitleContainer,
 } from './styles'
 export function Home() {
+	const { coffeeData } = useContext(ShoppingCartContext)
+
 	return (
 		<>
 			<IntroContainer>
@@ -64,13 +67,13 @@ export function Home() {
 				</TextContainer>
 				<img
 					src={coffee_img}
-					alt='Copo de café'
+					alt='Xícara de café'
 				/>
 			</IntroContainer>
 			<ListSection>
 				<h2>Nossos Cafés</h2>
 				<CardItensContainer>
-					{coffeesItens.map((item) => {
+					{coffeeData.map((item) => {
 						return (
 							<CardCoffee
 								key={item.id}
