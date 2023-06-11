@@ -8,14 +8,17 @@ interface CounterButtonProps {
 }
 
 export function CounterButton({ id }: CounterButtonProps) {
-	const { addItemToCart } = useContext(ShoppingCartContext)
+	const { removeItemToCart, addItemToCart, cartItens } =
+		useContext(ShoppingCartContext)
+
+	const numberItems = cartItens.find((item) => item.id === id)
 
 	return (
 		<CounterContainer>
-			<button>
+			<button onClick={() => removeItemToCart(id)}>
 				<Minus size={14} />
 			</button>
-			<span>0</span>
+			<span>{numberItems ? numberItems.quantity : 0}</span>
 			<button>
 				<Plus
 					size={14}
