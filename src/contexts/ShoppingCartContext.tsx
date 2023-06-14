@@ -27,6 +27,7 @@ type ShoppingCartContextType = {
 	coffeeData: CoffeeData[]
 	addItemToCart: (id: string) => void
 	removeItemToCart: (id: string) => void
+	updateTotal: () => number
 }
 
 export const ShoppingCartContext = createContext({} as ShoppingCartContextType)
@@ -40,23 +41,25 @@ export function ShoppingCartContextProvider({
 	})
 	const [cartItens, setCartItens] = useState<ShoppingCartItem[]>([])
 
+	const amountTotal = cartItens.reduce((acc, item) => acc + item.quantity, 0)
+
+	function updateTotal() {
+		return amountTotal
+	}
+
 	function addItemToCart(id: string) {
 		const itemExists = cartItens.some((item) => item.id === id)
 
 		if (itemExists) {
-			// Se o item já existe no carrinho, faça uma cópia do carrinho
 			const updatedCart = cartItens.map((item) => {
 				if (item.id === id) {
-					// Se encontrar o item, incremente a quantidade
 					return { ...item, quantity: item.quantity + 1 }
 				}
 				return item
 			})
 
-			// Atualize o estado do carrinho com o novo array
 			setCartItens(updatedCart)
 		} else {
-			// Se o item não existe no carrinho, crie um novo objeto do item
 			const itemReturn = coffeeData.find((item) => item.id === id)
 			if (itemReturn) {
 				const newItem = {
@@ -75,10 +78,8 @@ export function ShoppingCartContextProvider({
 		const itemExists = cartItens.some((item) => item.id === id)
 
 		if (itemExists) {
-			// Se o item já existe no carrinho, faça uma cópia do carrinho
 			const updatedCart = cartItens.map((item) => {
 				if (item.id === id) {
-					// Se encontrar o item, decremente a quantidade
 					if (item.quantity < 0) {
 						return item
 					} else {
@@ -88,7 +89,6 @@ export function ShoppingCartContextProvider({
 				return item
 			})
 
-			// Atualize o estado do carrinho com o novo array
 			const itemsToRemove = updatedCart.filter((item) => item.quantity > 0)
 			setCartItens(itemsToRemove)
 		}
@@ -96,7 +96,13 @@ export function ShoppingCartContextProvider({
 
 	return (
 		<ShoppingCartContext.Provider
-			value={{ removeItemToCart, cartItens, addItemToCart, coffeeData }}
+			value={{
+				removeItemToCart,
+				cartItens,
+				addItemToCart,
+				coffeeData,
+				updateTotal,
+			}}
 		>
 			{children}
 		</ShoppingCartContext.Provider>

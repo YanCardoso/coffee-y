@@ -1,4 +1,3 @@
-import coffee from '../../assets/Type_Americano.png'
 import { CounterButton } from '../CounterButton'
 import { RemoveButton } from '../RemoveButton'
 import {
@@ -9,21 +8,33 @@ import {
 	ProductDetailsBox,
 } from './styles'
 
-export function CartProductItem() {
+interface CartProductItemProps {
+	id: string
+	name: string
+	price: number
+	coffeeImg: string
+}
+
+export function CartProductItem({
+	id,
+	name,
+	price,
+	coffeeImg,
+}: CartProductItemProps) {
 	return (
 		<>
 			<CartProductItemContainer>
 				<img
-					src={coffee}
+					src={coffeeImg}
 					alt='coffee'
 				/>
 				<ProductDetailsBox>
 					<HeaderDetails>
-						<span>Expresso Tradicional</span>
-						<span>R$ 54,77</span>
+						<span>{name}</span>
+						<span>R$ {price}</span>
 					</HeaderDetails>
 					<ButtonsGroup>
-						<CounterButton />
+						<CounterButton id={id} />
 						<RemoveButton />
 					</ButtonsGroup>
 				</ProductDetailsBox>
