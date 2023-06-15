@@ -14,9 +14,9 @@ export function CartButton({ variant }: CartContainer) {
 	const goCheckout = () => navigate('/checkout')
 
 	{
-		if (variant === 'gold') {
+		if (variant === 'gold' && updateTotal().itensTotal > 0) {
 			return (
-				<StyledBadge badgeContent={updateTotal()}>
+				<StyledBadge badgeContent={updateTotal().itensTotal}>
 					<CartContainer
 						variant={variant}
 						onClick={goCheckout}

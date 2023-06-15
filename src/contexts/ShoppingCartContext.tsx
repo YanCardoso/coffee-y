@@ -25,9 +25,14 @@ interface ShoppingCartContextProps {
 type ShoppingCartContextType = {
 	cartItens: ShoppingCartItem[]
 	coffeeData: CoffeeData[]
-	addItemToCart: (id: string) => void
+	incrementQuantity: (id: string) => void
+	decrementQuantity: (id: string) => void
 	removeItemToCart: (id: string) => void
-	updateTotal: () => number
+	updateTotal: () => {
+		itensTotal: number
+		priceTotal: number
+		deliveryCost: number
+	}
 }
 
 export const ShoppingCartContext = createContext({} as ShoppingCartContextType)
@@ -41,13 +46,17 @@ export function ShoppingCartContextProvider({
 	})
 	const [cartItens, setCartItens] = useState<ShoppingCartItem[]>([])
 
-	const amountTotal = cartItens.reduce((acc, item) => acc + item.quantity, 0)
+	const itensTotal = cartItens.reduce((acc, item) => acc + item.quantity, 0)
+	const priceTotal = cartItens.reduce(
+		(acc, item) => (acc += item.quantity * item.price),
+		0
+	)
 
 	function updateTotal() {
-		return amountTotal
+		return { itensTotal, priceTotal, deliveryCost: 5.2 }
 	}
 
-	function addItemToCart(id: string) {
+	function incrementQuantity(id: string) {
 		const itemExists = cartItens.some((item) => item.id === id)
 
 		if (itemExists) {
@@ -75,6 +84,12 @@ export function ShoppingCartContextProvider({
 	}
 
 	function removeItemToCart(id: string) {
+		const newlistItens = cartItens.filter((item) => item.id !== id)
+
+		setCartItens(newlistItens)
+	}
+
+	function decrementQuantity(id: string) {
 		const itemExists = cartItens.some((item) => item.id === id)
 
 		if (itemExists) {
@@ -98,8 +113,9 @@ export function ShoppingCartContextProvider({
 		<ShoppingCartContext.Provider
 			value={{
 				removeItemToCart,
+				incrementQuantity,
+				decrementQuantity,
 				cartItens,
-				addItemToCart,
 				coffeeData,
 				updateTotal,
 			}}

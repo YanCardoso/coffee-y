@@ -36,7 +36,7 @@ import {
 } from './styles'
 
 export function Checkout() {
-	const { cartItens } = useContext(ShoppingCartContext)
+	const { cartItens, updateTotal } = useContext(ShoppingCartContext)
 
 	return (
 		<form action=''>
@@ -95,21 +95,28 @@ export function Checkout() {
 					<h2>Cafés selecionados</h2>
 					<CheckoutCart>
 						{cartItens.map((item) => {
-							return <CartProductItem key={item.id} {...item} />
+							return (
+								<CartProductItem
+									key={item.id}
+									{...item}
+								/>
+							)
 						})}
 
 						<TotalPriceContainer>
 							<TotalItemsWrapper>
 								<span>Total de itens</span>
-								<span>R$ 46,54</span>
+								<span>R$ {updateTotal().priceTotal}</span>
 							</TotalItemsWrapper>
 							<DeliveryWrapper>
 								<span>Entrega</span>
-								<span>R$ 49,45</span>
+								<span>R$ {updateTotal().deliveryCost}</span>
 							</DeliveryWrapper>
 							<TotalWrapper>
 								<span>Total</span>
-								<span>R$ 858,99</span>
+								<span>
+									R$ {updateTotal().priceTotal + updateTotal().deliveryCost}
+								</span>
 							</TotalWrapper>
 						</TotalPriceContainer>
 						<SubmitOrderButton type='submit'>

@@ -8,22 +8,25 @@ interface CounterButtonProps {
 }
 
 export function CounterButton({ id }: CounterButtonProps) {
-	const { removeItemToCart, addItemToCart, cartItens } =
+	const { decrementQuantity, incrementQuantity, cartItens } =
 		useContext(ShoppingCartContext)
 
 	const numberItems = cartItens.find((item) => item.id === id)
 
 	return (
 		<CounterContainer>
-			<button onClick={() => removeItemToCart(id)}>
+			<button
+				type='button'
+				onClick={() => decrementQuantity(id)}
+			>
 				<Minus size={14} />
 			</button>
 			<span>{numberItems ? numberItems.quantity : 0}</span>
-			<button>
-				<Plus
-					size={14}
-					onClick={() => addItemToCart(id)}
-				/>
+			<button
+				type='button'
+				onClick={() => incrementQuantity(id)}
+			>
+				<Plus size={14} />
 			</button>
 		</CounterContainer>
 	)

@@ -35,7 +35,7 @@ export function CartProductItem({
 					</HeaderDetails>
 					<ButtonsGroup>
 						<CounterButton id={id} />
-						<RemoveButton />
+						<RemoveButton id={id} />
 					</ButtonsGroup>
 				</ProductDetailsBox>
 			</CartProductItemContainer>
