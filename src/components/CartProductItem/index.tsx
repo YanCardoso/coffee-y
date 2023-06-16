@@ -1,3 +1,4 @@
+import { intlBRL } from '../../utils/intl'
 import { CounterButton } from '../CounterButton'
 import { RemoveButton } from '../RemoveButton'
 import {
@@ -21,6 +22,7 @@ export function CartProductItem({
 	price,
 	coffeeImg,
 }: CartProductItemProps) {
+
 	return (
 		<>
 			<CartProductItemContainer>
@@ -31,7 +33,7 @@ export function CartProductItem({
 				<ProductDetailsBox>
 					<HeaderDetails>
 						<span>{name}</span>
-						<span>R$ {price}</span>
+						<span>{intlBRL.format(price)}</span>
 					</HeaderDetails>
 					<ButtonsGroup>
 						<CounterButton id={id} />

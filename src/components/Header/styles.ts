@@ -8,6 +8,10 @@ export const HeaderContainer = styled.header`
   margin-bottom: 2rem;
   height: 2.5rem;
 
+  img {
+    cursor: pointer;
+  }
+
   nav {
     display: flex;
     align-items: center;
@@ -24,10 +28,8 @@ export const HeaderContainer = styled.header`
       align-items: center;
       background: ${props => props.theme["purple-light"]};
       gap: 0.25rem;
-
       max-width: 8.75rem;
       height: 100%;
-
       font-family: 'Roboto', sans-serif;
       font-weight: 400;
       line-height: 130%;

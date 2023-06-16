@@ -24,7 +24,7 @@ export const coffeesItens: CoffeeItem[] = [
 		name: 'Expresso Tradicional',
 		description:
 			'Café expresso tradicional feito com água quente e grãos moídos',
-		price: 10.0,
+		price: 10.9,
 		coffeeImg: pathImg.Type_Expresso,
 		label: [label.Tradicional],
 	},
@@ -74,7 +74,7 @@ export const coffeesItens: CoffeeItem[] = [
 		name: 'Cappuccino',
 		description:
 			'Bebida com canela feita de doses iguais de café, leite e espuma',
-		price: 11.0,
+		price: 11.9,
 		coffeeImg: pathImg.Type_Capuccino,
 		label: [label.Tradicional, label.Com_Leite],
 	},

@@ -41,7 +41,7 @@ export function CardCoffee({
 
 			<BuyContainer>
 				<label>
-					<span>R$</span> {price}
+					<span>R$</span> {Intl.NumberFormat('pt-BR', {currency: 'BRL', minimumFractionDigits: 2}).format(price)}
 				</label>
 				<ActionButtons>
 					<CounterButton id={id}/>

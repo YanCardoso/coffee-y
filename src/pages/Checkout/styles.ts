@@ -1,4 +1,8 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+interface ButtonProps {
+	borderEnabled?: boolean
+}
 
 export const CheckoutContainer = styled.div`
 	display: flex;
@@ -198,26 +202,36 @@ export const ButtonGroupContainer = styled.div`
 	align-items: center;
 	width: 100%;
 	gap: 0.75rem;
+`
+export const ButtonPayment = styled.button<ButtonProps>`
+	display: flex;
+	flex: 1;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	line-height: 130%;
+	font-size: 0.75rem;
+	color: ${(props) => props.theme['base-text']};
+	padding: 1rem;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	gap: 0.75rem;
 
-	& > button {
-		display: flex;
-		flex: 1;
-		font-family: 'Roboto', sans-serif;
-		font-weight: 400;
-		line-height: 130%;
-		font-size: 0.75rem;
-		color: ${(props) => props.theme['base-text']};
-		padding: 1rem;
-		border: none;
-		border-radius: 6px;
-		cursor: pointer;
-		gap: 0.75rem;
+	${({ borderEnabled }) =>
+		borderEnabled &&
+		css`
+			border: 1px solid ${(props) => props.theme.purple};
+		`}
 
-		& > svg {
-			color: ${(props) => props.theme.purple};
-		}
+	&:hover {
+		background: ${(props) => props.theme['base-hover']};
+	}
+
+	svg {
+		color: ${(props) => props.theme.purple};
 	}
 `
+
 export const SubmitOrderButton = styled.button`
 	display: flex;
 	width: 100%;
@@ -235,5 +249,4 @@ export const SubmitOrderButton = styled.button`
 	font-size: 0.875rem;
 	font-weight: 700;
 	line-height: 130%;
-
 `

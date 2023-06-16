@@ -8,11 +8,13 @@ import {
 import { useContext } from 'react'
 import { CartProductItem } from '../../components/CartProductItem'
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
+import { intlBRL } from '../../utils/intl'
 import {
 	BoxCart,
 	BoxForm,
 	BoxPayment,
 	ButtonGroupContainer,
+	ButtonPayment,
 	CheckoutCart,
 	CheckoutContainer,
 	CityInput,
@@ -76,18 +78,18 @@ export function Checkout() {
 							</HeaderTextBox>
 						</HeaderPaymentBox>
 						<ButtonGroupContainer>
-							<button>
+							<ButtonPayment type='button'>
 								<CreditCard size={16} />
 								CARTÃO DE CRÉDITO
-							</button>
-							<button>
+							</ButtonPayment>
+							<ButtonPayment type='button'>
 								<Bank size={16} />
 								CARTÃO DE DEBITO
-							</button>
-							<button>
+							</ButtonPayment>
+							<ButtonPayment borderEnabled type='button'>
 								<Money size={16} />
 								DINHEIRO
-							</button>
+							</ButtonPayment>
 						</ButtonGroupContainer>
 					</BoxPayment>
 				</BoxForm>
@@ -106,16 +108,18 @@ export function Checkout() {
 						<TotalPriceContainer>
 							<TotalItemsWrapper>
 								<span>Total de itens</span>
-								<span>R$ {updateTotal().priceTotal}</span>
+								<span>{intlBRL.format(updateTotal().priceTotal)}</span>
 							</TotalItemsWrapper>
 							<DeliveryWrapper>
 								<span>Entrega</span>
-								<span>R$ {updateTotal().deliveryCost}</span>
+								<span>{intlBRL.format(updateTotal().deliveryCost)}</span>
 							</DeliveryWrapper>
 							<TotalWrapper>
 								<span>Total</span>
 								<span>
-									R$ {updateTotal().priceTotal + updateTotal().deliveryCost}
+									{intlBRL.format(
+										updateTotal().priceTotal + updateTotal().deliveryCost
+									)}
 								</span>
 							</TotalWrapper>
 						</TotalPriceContainer>
