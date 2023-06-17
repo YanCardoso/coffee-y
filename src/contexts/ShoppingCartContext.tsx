@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useState } from 'react'
+import voca from 'voca'
 import { coffeesItens } from '../utils/coffeeItens'
 
 interface CoffeeData {
@@ -25,14 +26,27 @@ interface ShoppingCartContextProps {
 type ShoppingCartContextType = {
 	cartItens: ShoppingCartItem[]
 	coffeeData: CoffeeData[]
+	orderConfirmed: FormValues
 	incrementQuantity: (id: string) => void
 	decrementQuantity: (id: string) => void
 	removeItemToCart: (id: string) => void
+	finalizeOrder: (data: FormValues) => void
 	updateTotal: () => {
 		itensTotal: number
 		priceTotal: number
 		deliveryCost: number
 	}
+}
+
+interface FormValues {
+	city: string
+	complement?: string
+	neighborhood: string
+	number: string
+	paymentMethod: string
+	postalCode: string
+	state: string
+	street: string
 }
 
 export const ShoppingCartContext = createContext({} as ShoppingCartContextType)
@@ -45,12 +59,28 @@ export function ShoppingCartContextProvider({
 		return initialData
 	})
 	const [cartItens, setCartItens] = useState<ShoppingCartItem[]>([])
+	const [orderConfirmed, setOrderConfirmed] = useState({} as any)
 
 	const itensTotal = cartItens.reduce((acc, item) => acc + item.quantity, 0)
 	const priceTotal = cartItens.reduce(
 		(acc, item) => (acc += item.quantity * item.price),
 		0
 	)
+
+	function finalizeOrder(data: FormValues) {
+		const newData = {
+			city: voca.titleCase(data.city),
+			complement: voca.titleCase(data.complement),
+			neighborhood: voca.titleCase(data.neighborhood),
+			number: data.number,
+			paymentMethod: data.paymentMethod,
+			postalCode: data.postalCode,
+			state: data.state,
+			street: voca.titleCase(data.neighborhood),
+		}
+
+		setOrderConfirmed(newData)
+	}
 
 	function updateTotal() {
 		return { itensTotal, priceTotal, deliveryCost: 5.2 }
@@ -112,6 +142,8 @@ export function ShoppingCartContextProvider({
 	return (
 		<ShoppingCartContext.Provider
 			value={{
+				orderConfirmed,
+				finalizeOrder,
 				removeItemToCart,
 				incrementQuantity,
 				decrementQuantity,

@@ -249,6 +249,7 @@ export const SubmitOrderButton = styled.button`
 	height: 2.875rem;
 	background: ${(props) => props.theme.yellow};
 	color: ${(props) => props.theme.white};
+	cursor: pointer;
 
 	font-family: 'Roboto', sans-serif;
 	font-size: 0.875rem;

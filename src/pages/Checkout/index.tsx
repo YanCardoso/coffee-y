@@ -6,7 +6,8 @@ import {
 	Money,
 } from 'phosphor-react'
 import { useContext, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { CartProductItem } from '../../components/CartProductItem'
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
 import { intlBRL } from '../../utils/intl'
@@ -40,21 +41,37 @@ import {
 
 type PaymentType = 'creditPayment' | 'debitPayment' | 'cashPayment'
 
+interface FormValues {
+	city: string
+	complement?: string
+	neighborhood: string
+	number: string
+	paymentMethod: string
+	postalCode: string
+	state: string
+	street: string
+}
+
 export function Checkout() {
 	const { register, handleSubmit, watch, reset, setValue } =
-		useForm()
-	const { cartItens, updateTotal } = useContext(ShoppingCartContext)
+		useForm<FormValues>()
+	const { cartItens, updateTotal, finalizeOrder } =
+		useContext(ShoppingCartContext)
 	const [paymentType, setPaymentType] = useState('')
-
-	const onSubmit = (data) => console.log(data)
-
 	const isOptionalVisible = watch('complement') !== ''
+	const navigate = useNavigate()
+	const goToSuccessPage = () => navigate('/success')
+
+	const onSubmit: SubmitHandler<FormValues> = (data) => {
+		finalizeOrder(data)
+		reset()
+		goToSuccessPage()
+	}
 
 	const handlePaymentSelection = (paymentMethod: PaymentType) => {
 		setValue('paymentMethod', paymentMethod)
 		setPaymentType(paymentMethod)
 	}
-
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
@@ -117,17 +134,14 @@ export function Checkout() {
 						<ButtonGroupContainer>
 							<ButtonPayment
 								type='button'
-								name='credit'
 								onClick={() => handlePaymentSelection('creditPayment')}
 								borderEnabled={paymentType === 'creditPayment' ? true : false}
-
 							>
 								<CreditCard size={16} />
 								CARTÃO DE CRÉDITO
 							</ButtonPayment>
 							<ButtonPayment
 								type='button'
-								name='debit'
 								onClick={() => handlePaymentSelection('debitPayment')}
 								borderEnabled={paymentType === 'debitPayment' ? true : false}
 							>
@@ -136,10 +150,8 @@ export function Checkout() {
 							</ButtonPayment>
 							<ButtonPayment
 								type='button'
-								name='cash'
 								onClick={() => handlePaymentSelection('cashPayment')}
 								borderEnabled={paymentType === 'cashPayment' ? true : false}
-
 							>
 								<Money size={16} />
 								DINHEIRO

@@ -1,17 +1,31 @@
+import { useContext } from 'react'
 import deliveryImg from '../../assets/Illustration.png'
+import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
 import {
-  CurrencyDollarIcon,
-  DeliveryAddress,
-  DeliveryEstimate,
-  MapPinIcon,
-  OrderSummaryContainer,
-  PaymentMethod,
-  SuccessContainer,
-  SummaryBox,
-  TimerIcon,
+	CurrencyDollarIcon,
+	DeliveryAddress,
+	DeliveryEstimate,
+	MapPinIcon,
+	OrderSummaryContainer,
+	PaymentMethod,
+	SuccessContainer,
+	SummaryBox,
+	TimerIcon,
 } from './styles'
 
+type payment = {
+	[key: string]: string
+}
+
 export function Success() {
+	const { orderConfirmed } = useContext(ShoppingCartContext)
+
+	const paymentType: payment = {
+		creditPayment: 'Cartã de Credito',
+		debitPayment: 'Cartão de Debito',
+		cashPayment: 'Dinheiro',
+	}
+
 	return (
 		<SuccessContainer>
 			<SummaryBox>
@@ -24,8 +38,19 @@ export function Success() {
 							weight='fill'
 						/>
 						<div>
-							<span>Entrega em Rua João Daniel Martinelli, 102</span>
-							<span>Farrapos - Porto Alegre, RS</span>
+							<span>
+								Entrega em
+								<strong>
+									{` ` + orderConfirmed.street + `, ` + orderConfirmed.number}
+								</strong>
+							</span>
+							<span>
+								{orderConfirmed.neighborhood +
+									` - ` +
+									orderConfirmed.city +
+									`, ` +
+									orderConfirmed.state}
+							</span>
 						</div>
 					</DeliveryAddress>
 					<DeliveryEstimate>
@@ -35,7 +60,9 @@ export function Success() {
 						/>
 						<div>
 							<span>Previsão de entrega</span>
-							<span>20 min - 30 min </span>
+							<span>
+								<strong>20 min - 30 min </strong>
+							</span>
 						</div>
 					</DeliveryEstimate>
 					<PaymentMethod>
@@ -45,7 +72,9 @@ export function Success() {
 						/>
 						<div>
 							<span>Pagamento na entrega</span>
-							<span>Cartão de Crédito</span>
+							<span>
+								<strong>{paymentType[orderConfirmed.paymentMethod]}</strong>
+							</span>
 						</div>
 					</PaymentMethod>
 				</OrderSummaryContainer>
