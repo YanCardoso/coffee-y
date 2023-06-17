@@ -5,7 +5,8 @@ import {
 	MapPinLine,
 	Money,
 } from 'phosphor-react'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { CartProductItem } from '../../components/CartProductItem'
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
 import { intlBRL } from '../../utils/intl'
@@ -37,11 +38,26 @@ import {
 	TotalWrapper,
 } from './styles'
 
+type PaymentType = 'creditPayment' | 'debitPayment' | 'cashPayment'
+
 export function Checkout() {
+	const { register, handleSubmit, watch, reset, setValue } =
+		useForm()
 	const { cartItens, updateTotal } = useContext(ShoppingCartContext)
+	const [paymentType, setPaymentType] = useState('')
+
+	const onSubmit = (data) => console.log(data)
+
+	const isOptionalVisible = watch('complement') !== ''
+
+	const handlePaymentSelection = (paymentMethod: PaymentType) => {
+		setValue('paymentMethod', paymentMethod)
+		setPaymentType(paymentMethod)
+	}
+
 
 	return (
-		<form action=''>
+		<form onSubmit={handleSubmit(onSubmit)}>
 			<CheckoutContainer>
 				<BoxForm>
 					<h2>Complete seu pedido</h2>
@@ -54,16 +70,37 @@ export function Checkout() {
 							</HeaderTextBox>
 						</HeaderDeliveryAddressBox>
 						<FormBody>
-							<PostalCodeInput placeholder='CEP' />
-							<StreetInput placeholder='Rua' />
-							<NumberInput placeholder='Número' />
+							<PostalCodeInput
+								placeholder='CEP'
+								{...register('postalCode')}
+							/>
+							<StreetInput
+								placeholder='Rua'
+								{...register('street')}
+							/>
+							<NumberInput
+								placeholder='Número'
+								{...register('number')}
+							/>
 							<OptionalBox>
-								<ComplementInput placeholder='Complemento' />
-								<span>Opcional</span>
+								<ComplementInput
+									placeholder='Complemento'
+									{...register('complement')}
+								/>
+								{!isOptionalVisible && <span>Opcional</span>}
 							</OptionalBox>
-							<NeighborhoodInput placeholder='Bairro' />
-							<CityInput placeholder='Cidade' />
-							<StateInput placeholder='UF' />
+							<NeighborhoodInput
+								placeholder='Bairro'
+								{...register('neighborhood')}
+							/>
+							<CityInput
+								placeholder='Cidade'
+								{...register('city')}
+							/>
+							<StateInput
+								placeholder='UF'
+								{...register('state')}
+							/>
 						</FormBody>
 					</CompleteOrderForm>
 					<BoxPayment>
@@ -78,15 +115,32 @@ export function Checkout() {
 							</HeaderTextBox>
 						</HeaderPaymentBox>
 						<ButtonGroupContainer>
-							<ButtonPayment type='button'>
+							<ButtonPayment
+								type='button'
+								name='credit'
+								onClick={() => handlePaymentSelection('creditPayment')}
+								borderEnabled={paymentType === 'creditPayment' ? true : false}
+
+							>
 								<CreditCard size={16} />
 								CARTÃO DE CRÉDITO
 							</ButtonPayment>
-							<ButtonPayment type='button'>
+							<ButtonPayment
+								type='button'
+								name='debit'
+								onClick={() => handlePaymentSelection('debitPayment')}
+								borderEnabled={paymentType === 'debitPayment' ? true : false}
+							>
 								<Bank size={16} />
 								CARTÃO DE DEBITO
 							</ButtonPayment>
-							<ButtonPayment borderEnabled type='button'>
+							<ButtonPayment
+								type='button'
+								name='cash'
+								onClick={() => handlePaymentSelection('cashPayment')}
+								borderEnabled={paymentType === 'cashPayment' ? true : false}
+
+							>
 								<Money size={16} />
 								DINHEIRO
 							</ButtonPayment>

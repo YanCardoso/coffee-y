@@ -157,6 +157,11 @@ const BaseInput = styled.input`
 	&::placeholder {
 		color: ${(props) => props.theme['base-label']};
 	}
+
+	&:focus {
+		outline: none;
+		border: 1px solid ${(props) => props.theme['yellow-dark']};
+	}
 `
 
 export const PostalCodeInput = styled(BaseInput)`
