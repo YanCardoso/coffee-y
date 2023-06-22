@@ -1,6 +1,7 @@
 import { ShoppingCartSimple } from 'phosphor-react'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
 import { CartContainer, StyledBadge, VariantColors } from './styles'
 
@@ -9,9 +10,15 @@ interface CartContainer {
 }
 
 export function CartButton({ variant }: CartContainer) {
-	const { updateTotal } = useContext(ShoppingCartContext)
+	const { updateTotal, cartItens } = useContext(ShoppingCartContext)
 	const navigate = useNavigate()
-	const goCheckout = () => navigate('/checkout')
+	const goCheckout = () => {
+		if (cartItens.length !== 0) {
+			navigate('/checkout')
+		} else {
+			toast.error('Nenhum item adicionado ao carrinho')
+		}
+	}
 
 	{
 		if (variant === 'gold' && updateTotal().itensTotal > 0) {

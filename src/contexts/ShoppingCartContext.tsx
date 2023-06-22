@@ -23,7 +23,7 @@ interface ShoppingCartContextProps {
 	children: ReactNode
 }
 
-type ShoppingCartContextType = {
+export type ShoppingCartContextType = {
 	cartItens: ShoppingCartItem[]
 	coffeeData: CoffeeData[]
 	orderConfirmed: FormValues
@@ -81,6 +81,7 @@ export function ShoppingCartContextProvider({
 
 		setOrderConfirmed(newData)
 	}
+
 
 	function updateTotal() {
 		return { itensTotal, priceTotal, deliveryCost: 5.2 }

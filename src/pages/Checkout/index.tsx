@@ -58,8 +58,8 @@ export function Checkout() {
 	const { cartItens, updateTotal, finalizeOrder } =
 		useContext(ShoppingCartContext)
 	const [paymentType, setPaymentType] = useState('')
-	const isOptionalVisible = watch('complement') !== ''
 	const navigate = useNavigate()
+	const isOptionalVisible = watch('complement') !== ''
 	const goToSuccessPage = () => navigate('/success')
 
 	const onSubmit: SubmitHandler<FormValues> = (data) => {
