@@ -1,6 +1,6 @@
 # Coffee-Y - Web App with Delivery
 
-Welcome to Coffee-Y, a web application for an online coffee shop with delivery functionality. This repository serves as a study project, showcasing the implementation of various technologies and libraries. The app is built using Vite, React, TypeScript, Styled Components, Context API, and React Hook Form.
+Welcome to Coffee-Y, a web application for an online coffee shop with delivery functionality. This repository serves as a study project, showcasing the implementation of various technologies and libraries. The app is built using Vite, React, TypeScript, Styled Components, Context API, React Hook Form, and Zod for form validation.
 
 ## Technologies Used
 
@@ -10,6 +10,7 @@ Welcome to Coffee-Y, a web application for an online coffee shop with delivery f
 - [Styled Components](https://styled-components.com/): A library for styling React components using tagged template literals.
 - [Context API](https://reactjs.org/docs/context.html): A feature in React for managing global application state.
 - [React Hook Form](https://react-hook-form.com/): A library for building performant and flexible forms in React.
+- [Zod](https://github.com/colinhacks/zod): A TypeScript-first schema validation library.
 
 ## Features
 
