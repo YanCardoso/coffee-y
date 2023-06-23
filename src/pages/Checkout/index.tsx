@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import {
 	Bank,
 	CreditCard,
@@ -8,6 +9,7 @@ import {
 import { useContext, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import * as zod from 'zod'
 import { CartProductItem } from '../../components/CartProductItem'
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext'
 import { intlBRL } from '../../utils/intl'
@@ -45,21 +47,44 @@ interface FormValues {
 	city: string
 	complement?: string
 	neighborhood: string
-	number: string
+	number: number
 	paymentMethod: string
 	postalCode: string
 	state: string
 	street: string
 }
 
+const formValidationSchema = zod
+	.object({
+		city: zod.string().min(1, 'Adicione a cidade'),
+		complement: zod.string().min(1).optional(),
+		neighborhood: zod.string().min(1),
+		number: zod.number().positive().min(1).int(),
+		paymentMethod: zod.string(),
+		postalCode: zod.string().min(1),
+		state: zod.string().min(1).max(2),
+		street: zod.string().min(1),
+	})
+	.required({
+		city: true,
+		neighborhood: true,
+		number: true,
+		paymentMethod: true,
+		postalCode: true,
+		state: true,
+		street: true,
+	})
+
 export function Checkout() {
 	const { register, handleSubmit, watch, reset, setValue } =
-		useForm<FormValues>()
+		useForm<FormValues>({ resolver: zodResolver(formValidationSchema) })
 	const { cartItens, updateTotal, finalizeOrder } =
 		useContext(ShoppingCartContext)
 	const [paymentType, setPaymentType] = useState('')
 	const navigate = useNavigate()
-	const isOptionalVisible = watch('complement') !== ''
+	const complement = watch('complement')
+	const isOptionalVisible = complement
+
 	const goToSuccessPage = () => navigate('/success')
 
 	const onSubmit: SubmitHandler<FormValues> = (data) => {
@@ -97,7 +122,7 @@ export function Checkout() {
 							/>
 							<NumberInput
 								placeholder='Número'
-								{...register('number')}
+								{...register('number', { valueAsNumber: true })}
 							/>
 							<OptionalBox>
 								<ComplementInput

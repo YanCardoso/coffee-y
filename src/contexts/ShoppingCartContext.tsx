@@ -42,7 +42,7 @@ interface FormValues {
 	city: string
 	complement?: string
 	neighborhood: string
-	number: string
+	number: number
 	paymentMethod: string
 	postalCode: string
 	state: string
@@ -59,7 +59,7 @@ export function ShoppingCartContextProvider({
 		return initialData
 	})
 	const [cartItens, setCartItens] = useState<ShoppingCartItem[]>([])
-	const [orderConfirmed, setOrderConfirmed] = useState({} as any)
+	const [orderConfirmed, setOrderConfirmed] = useState({} as FormValues)
 
 	const itensTotal = cartItens.reduce((acc, item) => acc + item.quantity, 0)
 	const priceTotal = cartItens.reduce(
@@ -76,12 +76,12 @@ export function ShoppingCartContextProvider({
 			paymentMethod: data.paymentMethod,
 			postalCode: data.postalCode,
 			state: data.state,
-			street: voca.titleCase(data.neighborhood),
+			street: voca.titleCase(data.street),
 		}
 
 		setOrderConfirmed(newData)
+		setCartItens([])
 	}
-
 
 	function updateTotal() {
 		return { itensTotal, priceTotal, deliveryCost: 5.2 }
